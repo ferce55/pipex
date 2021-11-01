@@ -1,5 +1,5 @@
 NAME		=	pipex
-SRCS		=	./srcs/utils.c ./srcs/pipex.c ./srcs/file_utils.c
+SRCS		=	./srcs/utils.c ./srcs/pipex.c ./srcs/path_file_utils.c
 
 CC			=	gcc
 CFLAGS		=	
