@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardo <ricardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:25:11 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/10/17 19:51:26 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/10/24 10:02:20 by ricardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ void	take_paths(t_pipe *pipe, char *envp[])
 	}
 }
 
-/*void	ft_pipex(t_pipe *pipe, char *envp[])
-{
-
-}*/
-
 int	main(int argc, char **argv, char *envp[])
 {
 	t_pipe	*pipe;
@@ -42,14 +37,14 @@ int	main(int argc, char **argv, char *envp[])
 	int		fdout;
 
 	atexit(bye);
-	if (argc != 5)
-		ft_error(1);
 	pipe = ft_calloc(sizeof(t_pipe), 1);
-	fdin = ft_openfile(argv[1], 0);
-	fdout = ft_openfile(argv[4], 1);
+	if (argc != 5)
+		ft_error(1, pipe);
+	fdin = ft_openfile(argv[1], 0, pipe);
+	fdout = ft_openfile(argv[4], 1, pipe);
 	pipe->fdin = fdin;
 	pipe->fdout = fdout;
-	//take_paths(pipe, envp);
-	//ft_pipex(pipe, envp);
+	take_paths(pipe, envp);
+	ft_freepipe(pipe);
 	return (0);
 }
