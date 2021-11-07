@@ -6,7 +6,7 @@
 /*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:25:11 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/01 13:17:44 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:31:24 by rsarri-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static void	take_paths(t_pipex *pipex, char *envp[])
 
 static void	ft_exec_cmd(int exec, t_pipex *pipex, char *envp[], int fd[2])
 {
+	char	*path;
+	char	**cmd;
+
 	if (exec == 1)
 	{
 		close(fd[READ_END]);
@@ -39,7 +42,9 @@ static void	ft_exec_cmd(int exec, t_pipex *pipex, char *envp[], int fd[2])
 		close(pipex->fdin);
 		dup2(fd[WRITE_END], STDOUT_FILENO);
 		close(fd[WRITE_END]);
-		ft_exec(1, pipex, envp);
+		path = path_cmd(pipex, envp, pipex->first_cmd, 1);
+		cmd = ft_split(pipex->first_cmd, ' ');
+		execve(path, cmd, envp);
 	}
 	else if (exec == 2)
 	{
@@ -47,7 +52,9 @@ static void	ft_exec_cmd(int exec, t_pipex *pipex, char *envp[], int fd[2])
 		close(fd[READ_END]);
 		dup2(pipex->fdout, STDOUT_FILENO);
 		close(pipex->fdout);
-		ft_exec(2, pipex, envp);
+		path = path_cmd(pipex, envp, pipex->sec_cmd, 2);
+		cmd = ft_split(pipex->sec_cmd, ' ');
+		execve(path, cmd, envp);
 	}
 }
 
@@ -75,10 +82,9 @@ int	main(int argc, char **argv, char *envp[])
 	int		fd[2];
 	int		status;
 
-	atexit(bye);
 	pipex = ft_calloc(sizeof(t_pipex), 1);
 	if (argc != 5)
-		ft_error(1, pipex);
+		ft_error(1, pipex, 0);
 	ft_init_pipe(argv, pipex);
 	take_paths(pipex, envp);
 	pipe(fd);
@@ -87,5 +93,6 @@ int	main(int argc, char **argv, char *envp[])
 	wait(&status);
 	ft_freematrix(pipex->path);
 	ft_freepipe(pipex);
+	atexit(bye);
 	return (0);
 }
