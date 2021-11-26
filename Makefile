@@ -23,14 +23,14 @@ clean:
 		make -C $(LIBFT_DIR) clean
 		@echo "-------Cleaning Pipex files-------"
 		$(RM) $(OBJS)
-		@echo "-------DONE!!!-------"
+		@echo "--------------DONE!!--------------"
 
 fclean:	clean
 		@echo "-------Cleaning Libft files-------"
 		make -C $(LIBFT_DIR) fclean
 		@echo "-------Cleaning Pipex files-------"
 		$(RM) $(NAME)
-		@echo "-------DONE!!!-------"
+		@echo "--------------DONE!!--------------"
 
 re:		fclean all
 

@@ -24,7 +24,7 @@ int	ft_openfile(char *file, int mode, t_pipex *pipex)
 	}
 	else if (mode == 1)
 	{
-		fd = open(file, O_WRONLY);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC);
 		if (fd == -1)
 			ft_error(3, pipex, 0);
 	}
