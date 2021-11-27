@@ -6,7 +6,7 @@
 /*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 13:09:37 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/27 11:37:27 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/11/27 12:04:18 by rsarri-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,17 @@ char	*path_cmd(t_pipex *pipex, char **envp, char *cmd, int pid)
 	char	*path;
 	char	*tmp;
 
-	if (access(cmd, X_OK) == 0)
-	{
-		cmd = ft_strchr(cmd, '/');
-		cmd++;
-	}
+	//if (access(cmd, X_OK) == 0)
+	//{
+	//	cmd = ft_strchr(cmd, '/');
+	//	cmd++;
+	//}
 	i = -1;
 	while (envp[++i])
+	{
 		if (ft_strncmp("PATH=", envp[i], 5) == 0)
 			pipex->path = ft_split(ft_strchr(envp[i], '/'), ':');
+	}
 	i = 0;
 	while (pipex->path[i])
 	{

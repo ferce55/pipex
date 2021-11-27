@@ -2,7 +2,7 @@ NAME		=	pipex
 SRCS		=	./srcs/utils.c ./srcs/pipex.c ./srcs/path_file_utils.c
 
 CC			=	@gcc
-CFLAGS		=	-Wextra -Wall -Werror
+CFLAGS		=	-g -fsanitize=address
 RM			=	rm -rf
 
 
