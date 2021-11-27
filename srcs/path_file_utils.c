@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardo <ricardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 13:09:37 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/27 12:04:18 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/11/27 16:53:35 by ricardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ char	*path_cmd(t_pipex *pipex, char **envp, char *cmd, int pid)
 	char	*path;
 	char	*tmp;
 
-	//if (access(cmd, X_OK) == 0)
-	//{
-	//	cmd = ft_strchr(cmd, '/');
-	//	cmd++;
-	//}
+	if (!*envp)
+	{
+		exit (1);
+	}
+	if (access(cmd, X_OK) == 0)
+	{
+		cmd = ft_strchr(cmd, '/');
+		cmd++;
+	}
 	i = -1;
 	while (envp[++i])
 	{

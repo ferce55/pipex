@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardo <ricardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:25:11 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/27 12:01:49 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/11/27 17:02:20 by ricardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	ft_exec_cmd(int exec, t_pipex *pipex, char *envp[], int fd[2])
 	}
 }
 
-static void	ft_pid_checker(t_pipex *pipex, char *envp[], int	fd[2])
+static void	ft_pid_checker(t_pipex *pipex, char *envp[], int fd[2])
 {
 	int	pid;
 
@@ -91,7 +91,6 @@ int	main(int argc, char **argv, char *envp[])
 	ft_pid_checker(pipex, envp, fd);
 	wait(&status);
 	wait(&status);
-	ft_freematrix(pipex->path);
 	ft_freepipe(pipex);
 	atexit(bye);
 	return (0);
