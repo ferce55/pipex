@@ -6,7 +6,7 @@
 /*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:25:11 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/07 18:31:24 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/11/27 11:52:49 by rsarri-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ static void	take_paths(t_pipex *pipex, char *envp[])
 	int	i;
 
 	i = 0;
+	if (!*envp && !**envp)
+	{
+		exit(1);
+	}
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)

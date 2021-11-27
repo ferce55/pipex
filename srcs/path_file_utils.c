@@ -6,7 +6,7 @@
 /*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 13:09:37 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/07 12:37:51 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/11/27 11:37:27 by rsarri-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_openfile(char *file, int mode, t_pipex *pipex)
 {
 	int		fd;
 
+	fd = 0;
 	if (mode == 0)
 	{
 		fd = open(file, O_RDONLY);

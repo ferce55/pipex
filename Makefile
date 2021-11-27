@@ -1,8 +1,8 @@
 NAME		=	pipex
 SRCS		=	./srcs/utils.c ./srcs/pipex.c ./srcs/path_file_utils.c
 
-CC			=	gcc
-CFLAGS		=	
+CC			=	@gcc
+CFLAGS		=	-Wextra -Wall -Werror
 RM			=	rm -rf
 
 
@@ -11,25 +11,29 @@ LIBFT_DIR	=	libft/
 LIBFT		=	${LIBFT_DIR}libft.a
 
 $(NAME):	$(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+		@echo "---------Compiling Pipex----------"
+		$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+		@echo "--------------DONE!!--------------"
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+		@echo "---------Compiling Libft----------"
+		@make -s -C $(LIBFT_DIR)
+		@echo "--------------DONE!!--------------"
 
 all:		${NAME}
 
 clean:
 		@echo "-------Cleaning Libft files-------"
-		make -C $(LIBFT_DIR) clean
+		@make -s -C $(LIBFT_DIR) clean
 		@echo "-------Cleaning Pipex files-------"
-		$(RM) $(OBJS)
+		@$(RM) $(OBJS)
 		@echo "--------------DONE!!--------------"
 
 fclean:	clean
-		@echo "-------Cleaning Libft files-------"
-		make -C $(LIBFT_DIR) fclean
-		@echo "-------Cleaning Pipex files-------"
-		$(RM) $(NAME)
+		@echo "-------fCleaning Libft files------"
+		@make -s -C $(LIBFT_DIR) fclean
+		@echo "-------fCleaning Pipex files------"
+		@$(RM) $(NAME)
 		@echo "--------------DONE!!--------------"
 
 re:		fclean all
