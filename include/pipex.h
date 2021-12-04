@@ -6,7 +6,7 @@
 /*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:25:05 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/07 12:35:33 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/12/04 12:55:19 by rsarri-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ typedef struct s_pipex
 	int		fdout;
 }			t_pipex;
 
-int		ft_error(int ecode, t_pipex *pipex, int pid);
+int		ft_error(int ecode, t_pipex *pipex, char *cmd);
 int		ft_openfile(char *file, int mode, t_pipex *pipex);
 void	ft_freepipe(t_pipex *pipex);
 void	ft_freematrix(char **matrix);
 void	ft_init_pipe(char **argv, t_pipex *pipex);
-char	*path_cmd(t_pipex *pipex, char **envp, char *cmd, int pid);
+char	*path_cmd(t_pipex *pipex, char **envp, char *cmd);
 
 #endif

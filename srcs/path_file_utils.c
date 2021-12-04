@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricardo <ricardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 13:09:37 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/27 16:53:35 by ricardo          ###   ########.fr       */
+/*   Updated: 2021/12/04 13:01:17 by rsarri-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,25 @@ int	ft_openfile(char *file, int mode, t_pipex *pipex)
 	{
 		fd = open(file, O_RDONLY);
 		if (fd == -1)
-			ft_error(2, pipex, 0);
+			ft_error(2, pipex, "");
 	}
 	else if (mode == 1)
 	{
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (fd == -1)
-			ft_error(3, pipex, 0);
+			ft_error(3, pipex, "");
 	}
 	return (fd);
 }
 
-char	*path_cmd(t_pipex *pipex, char **envp, char *cmd, int pid)
+char	*path_cmd(t_pipex *pipex, char **envp, char *cmd)
 {
 	ssize_t	i;
 	char	*path;
 	char	*tmp;
 
 	if (!*envp)
-	{
-		exit (1);
-	}
-	if (access(cmd, X_OK) == 0)
-	{
-		cmd = ft_strchr(cmd, '/');
-		cmd++;
-	}
+		ft_error(4, pipex, cmd);
 	i = -1;
 	while (envp[++i])
 	{
@@ -63,6 +56,6 @@ char	*path_cmd(t_pipex *pipex, char **envp, char *cmd, int pid)
 			return (path);
 		i++;
 	}
-	ft_error(4, pipex, pid);
+	ft_error(4, pipex, cmd);
 	return (0);
 }

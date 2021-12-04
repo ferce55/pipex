@@ -6,15 +6,17 @@
 /*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:25:08 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/11/07 12:38:32 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2021/12/04 12:58:31 by rsarri-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-static int	ft_errormsg(char *str)
+static int	ft_errormsg(char *str, char *cmd)
 {
 	ft_putstr_fd(str, 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putchar_fd('\n', 2);
 	exit(1);
 }
 
@@ -48,22 +50,16 @@ void	ft_init_pipe(char **argv, t_pipex *pipex)
 	pipex->sec_cmd = ft_strdup(argv[3]);
 }
 
-int	ft_error(int ecode, t_pipex *pipex, int pid)
+int	ft_error(int ecode, t_pipex *pipex, char *cmd)
 {
 	ft_freepipe(pipex);
 	if (ecode == 1)
-		ft_errormsg("** ERROR **\nEl numero de argumentos es erroneo\n");
+		ft_errormsg("** ERROR **\nEl numero de argumentos es erroneo", cmd);
 	else if (ecode == 2)
-		ft_errormsg("** ERROR **\nError al abrir el fichero origen\n");
+		ft_errormsg("** ERROR **\nError al abrir el fichero origen", cmd);
 	else if (ecode == 3)
-		ft_errormsg("** ERROR **\nError al abrir el fichero destino\n");
+		ft_errormsg("** ERROR **\nError al abrir el fichero destino", cmd);
 	else if (ecode == 4)
-	{
-		if (pid == 1)
-			ft_errormsg("** ERROR **\nEl primer comando no ha sido encontrado\n");
-		else
-			ft_errormsg
-			("** ERROR **\nEl segundo comando no ha sido encontrado\n");
-	}
+		ft_errormsg("** ERROR **\nComando no encontrado: ", cmd);
 	return (0);
 }
