@@ -6,16 +6,11 @@
 /*   By: rsarri-c <rsarri-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:25:11 by rsarri-c          #+#    #+#             */
-/*   Updated: 2021/12/04 13:01:32 by rsarri-c         ###   ########.fr       */
+/*   Updated: 2022/01/16 11:34:55 by rsarri-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-
-static void	bye(void)
-{
-	system("leaks -q pipex");
-}
 
 static void	ft_exec_cmd(t_pipex *pipex, char *cmd, char *envp[])
 {
@@ -94,6 +89,5 @@ int	main(int argc, char **argv, char *envp[])
 	wait(&status);
 	wait(&status);
 	ft_freepipe(pipex);
-	atexit(bye);
 	return (0);
 }
